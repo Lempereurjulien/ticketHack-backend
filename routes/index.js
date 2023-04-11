@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
 const Trip = require('../models/trips');
-const Cart = require('../models/cart');
+const Cart = require('../models/carts');
 var moment = require('moment');
 const { ISO_8601 } = require('moment');
 /* GET home page. */
