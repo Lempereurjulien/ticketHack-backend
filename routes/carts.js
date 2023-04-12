@@ -9,18 +9,36 @@ const { ISO_8601 } = require('moment');
 
 
 
-router.get('/', (req, res) => {
-  Cart.find().then(data => {
-    res.json({carts : data});
-  })});
+  router.get("/", (req, res)=>{
+    Cart.find({})
+    .populate('panier')
+    .then(data => {
+      res.json({carts : data})
+    })
+  })
+
+  router.get("/purchase", (req, res)=>{
+    Cart.find({isBook: true})
+    .populate('panier')
+    .then(data => {
+      res.json({carts : data})
+    })
+  })
+
 
 
 //cart delete
 router.delete('/:panier', (req, res) => {
- Cart.deleteOne().then(data =>{
-    res.json({ result: true, carts: carts });
+ Cart.deleteOne({panier : req.params.panier})
+ .then(deletedTrip => {
+  if (deletedTrip) {}
+  Cart.find()
+  .then(data =>{
+    res.json({ result: true, carts: data });
      })});
+    });
 
   
  
 module.exports = router;
+
