@@ -17,16 +17,10 @@ const { ISO_8601 } = require('moment');
     })
   })
 
-  router.put("/purchase", (req, res)=>{
-    Cart.find({isBook: false})
-    .then(data => {
-      for(let i; i<data.length; i++){
-        console.log(data[i].isBook);
-        
-        // data[dat].isBook = true;
-        res.json({carts : data[i]})
-      }
-     })
+  router.get("/purchase", (req, res)=>{
+    Cart.updateMany({isBook: false}, {isBook : true})
+    .then(()=> console.log('update ok'));
+     
   })
 
 
