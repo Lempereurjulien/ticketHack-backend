@@ -10,7 +10,7 @@ const { ISO_8601 } = require('moment');
 
 
   router.get("/", (req, res)=>{
-    Cart.find({})
+    Cart.find({isBook : false})
     .populate('panier')
     .then(data => {
       res.json({carts : data})
@@ -36,7 +36,9 @@ router.delete('/:panier', (req, res) => {
      })});
     });
 
-  
+  router.get('/delete',(req,res) =>{
+    Cart.deleteMany({}).then(()=> console.log('all delete'))
+  })
  
 module.exports = router;
 
