@@ -17,13 +17,13 @@ const { ISO_8601 } = require('moment');
     })
   })
 
-  /*router.get("/purchase", (req, res)=>{
-    Cart.find({isBook: false})
+  router.get("/purchase", (req, res)=>{
+    Cart.find({isBook: true})
     .populate('panier')
     .then(data => {
       res.json({carts : data})
     })
-  })*/
+  })
 
 
 
