@@ -29,7 +29,6 @@ router.get('/tripsAddCart',(req, res) =>{
     date : req.body.date,
     price : req.body.price,
   })
-
   newCart.save()
   .then(() => console.log('Cart save'));
 })
