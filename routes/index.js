@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const fetch = require('node-fetch');
 const Trip = require('../models/trips');
 const Cart = require('../models/carts');
 var moment = require('moment');
@@ -24,7 +23,8 @@ Trip.find({
 
 router.post('/tripsAddCart',(req, res) =>{
   const newCart = new Cart({
-    panier : req.body.id
+    panier : req.body.id,
+    isBook : false,
   })
   newCart.save()
   .then(() => console.log('Cart save'));
