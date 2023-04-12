@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
 /**Get trips by arrival, departure, date */
 router.get('/tripsFilter/:departure/:arrival/:date', (req, res)=>{
 Trip.find({
-  departure : req.params.departure,
-   arrival : req.params.arrival,
+  departure :{$regex : new RegExp(req.params.departure, "i")},
+   arrival : {$regex : new RegExp(req.params.arrival, "i")},
    date : {$gte : moment(req.params.date).startOf('day'), $lte : moment(req.params.date,ISO_8601).endOf('day')}})
 .then(data => {
   res.json({trips : data});
@@ -22,12 +22,9 @@ Trip.find({
 }
 )
 
-router.get('/tripsAddCart',(req, res) =>{
+router.post('/tripsAddCart',(req, res) =>{
   const newCart = new Cart({
-    departure : req.body.departure,
-    arrival : req.body.arrival,
-    date : req.body.date,
-    price : req.body.price,
+    panier : req.body.id
   })
   newCart.save()
   .then(() => console.log('Cart save'));
